@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ inputText, setInputText, todos, setTodos }) => {
+const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   // App.js에서 선언한 useState를 props로 받았다.
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
@@ -12,6 +12,9 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
       { text: inputText, completed: false, id: Math.random() * 1000 },
     ]); // 버튼을 누르면 누적된 todo list (todos)와 괄호안에 새로운 todo를 todos에 추가한다.
     setInputText(""); //입력창은 빈칸으로 만든다.
+  };
+  const statusHandler = (e) => {
+    setStatus(e.target.value);
   };
   return (
     <form>
@@ -25,7 +28,7 @@ const Form = ({ inputText, setInputText, todos, setTodos }) => {
         <i className="fas fa-plus-square"></i>
       </button>
       <div className="select">
-        <select name="todos" className="filter-todo">
+        <select onChange={statusHandler} name="todos" className="filter-todo">
           <option value="all">All</option>
           <option value="completed">Completed</option>
           <option value="uncompleted">Uncompleted</option>
